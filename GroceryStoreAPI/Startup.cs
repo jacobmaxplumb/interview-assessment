@@ -23,6 +23,8 @@ namespace GroceryStoreAPI
         {
             services.AddControllers();
 
+            services.AddSwaggerGen();
+
             string conectionString = Configuration["ConnectionStrings:CustomersDBConnectionString"];
             services.AddDbContext<CustomersContext>(
                 options => options.UseSqlServer(conectionString));
@@ -38,6 +40,13 @@ namespace GroceryStoreAPI
             {
                 app.UseDeveloperExceptionPage();
             }
+
+            app.UseSwagger();
+
+            app.UseSwaggerUI(c =>
+            {
+                c.SwaggerEndpoint("/swagger/v1/swagger.json", "GroceryStore API V1");
+            });
 
             app.UseRouting();
 
