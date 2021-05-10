@@ -24,7 +24,8 @@ namespace GroceryStoreAPI.Controllers
             _customerRepository = customerRepository ?? throw new ArgumentNullException(nameof(customerRepository));
         }
 
-        [HttpGet("({customerIds})", Name = "GetCustomerCollection")]
+        [HttpGet("{customerIds}", Name = "GetCustomerCollection")]
+        [ApiExplorerSettings(IgnoreApi = true)]
         [CustomersResultFilter]
         public async Task<IActionResult> GetCustomerCollection([ModelBinder(BinderType = typeof(ArrayModelBinder))] IEnumerable<Guid> customerIds)
         {
